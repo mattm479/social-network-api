@@ -43,7 +43,11 @@ router.put('/:userId', async (req, res) => {
 
 router.delete('/:userId', async (req, res) => {
     try {
-        await User.findByIdAndDelete(req.params.userId);
+        const user = await User.findById(req.params.userId);
+
+        user.thoughts.forEach(thought => Thought.findByIdAndDelete(thought._id));
+
+        await User.findByIdAndDelete(userId);
 
         res.sendStatus(204);
     } catch (err) {
