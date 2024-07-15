@@ -1,0 +1,29 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattm479/social-network-api.git"
+  },
+  "author": "Matthew Miskov <mattm479@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattm479/social-network-api/issues"
+  },
+  "homepage": "https://github.com/mattm479/social-network-api#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0",
+    "mongoose": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
