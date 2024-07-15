@@ -1,5 +1,4 @@
 const {Thought, User} = require("../../models");
-const {reactionSchema} = require("../../models/Reaction");
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
@@ -59,10 +58,10 @@ router.delete('/:thoughtId', async (req, res) => {
 router.post('/:thoughtId/reactions', async (req, res) => {
     try {
         const thought = await Thought.findById(req.params.thoughtId);
-        const reaction = new reactionSchema();
-
-        reaction.reacitonBody = req.body.reactionBody;
-        reaction.username = req.body.username;
+        const reaction = {
+            reactionBody: req.body.reactionBody,
+            username: req.body.username
+        };
 
         thought.reactions.push(reaction);
         thought.save();
@@ -77,6 +76,7 @@ router.delete('/:thoughtId/reactions/:reactionId', async (req, res) => {
     try {
         const thought = await Thought.findById(req.params.thoughtId);
         const reactionIndex = thought.reactions.indexOf(req.params.reactionId);
+
         thought.reactions.splice(reactionIndex, 1);
         thought.save();
 
