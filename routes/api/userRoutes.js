@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('./../../models/User');
+const Thought = require('./../../models/Thought');
 
 router.get('/', async (req, res) => {
     try {
@@ -45,9 +46,9 @@ router.delete('/:userId', async (req, res) => {
     try {
         const user = await User.findById(req.params.userId);
 
-        user.thoughts.forEach(thought => Thought.findByIdAndDelete(thought._id));
+        user.thoughts.map(async thought => await Thought.findByIdAndDelete(thought));
 
-        await User.findByIdAndDelete(userId);
+        await User.findByIdAndDelete(req.params.userId);
 
         res.sendStatus(204);
     } catch (err) {
