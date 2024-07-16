@@ -29,7 +29,9 @@ router.post('/', async (req, res) => {
         user.thoughts.push(thought._id);
         user.save();
 
-        res.status(200).json(thought);
+        const newThought = await Thought.findById(thought._id).select('-__v');
+
+        res.status(200).json(newThought);
     } catch (err) {
         res.status(400).json(err.message);
     }
